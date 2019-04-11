@@ -4,7 +4,7 @@ import numpy as np
 import cv2
 import matplotlib.pyplot as plt
 import operator
-from os import listdir
+
 
 mndata = MNIST('../data')
 
@@ -41,7 +41,7 @@ print(imagesTrain_batch.shape)
 print(imagesTest_batch.shape)
 print(len(imagesTest_batch))
 
-def classify0(inX, dataSet, labels, k):
+def classify(inX, dataSet, labels, k):
     dataSetSize = dataSet.shape[0]
     diffMat = np.tile(inX, (dataSetSize,1)) - dataSet
     sqDiffMat = diffMat**2
@@ -60,7 +60,7 @@ if __name__ == "__main__":
     
     errorCount = 0.0
     for i in range(len(imagesTest_batch)):
-        classifierResult = classify0(imagesTest_batch[i], imagesTrain_batch, labelsTrain_batch, 3)
+        classifierResult = classify(imagesTest_batch[i], imagesTrain_batch, labelsTrain_batch, 3)
         print("the classifier came back with: %d, the real answer is: %d" % (classifierResult, labelsTest_batch[i]))
         if (classifierResult != labelsTest_batch[i]): errorCount += 1.0
     print("\nthe total number of errors is: %d" % errorCount) 
